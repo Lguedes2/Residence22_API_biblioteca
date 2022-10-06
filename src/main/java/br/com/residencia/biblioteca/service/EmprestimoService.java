@@ -38,6 +38,7 @@ import br.com.residencia.biblioteca.repository.EmprestimoRepository;
 		
 		}
 		
+		
 		public Empréstimo deleteEmprestimo(Integer id) {
 			EmprestimoRepository.deleteById(id);
 			return getEmprestimoById(id);

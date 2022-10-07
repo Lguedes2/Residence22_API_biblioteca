@@ -2,7 +2,6 @@ package br.com.residencia.biblioteca.entity;
 
 import java.time.Instant;
 
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -33,8 +32,12 @@ public class Livro {
 	@Column(name = "codigoisbn")
 	private Integer codigoIsbn;
 
-	@Column(name = "codigoeditora")
-	private Integer codigoEditora;
+	@ManyToOne
+	@JoinColumn(name = "codigoeditora", referencedColumnName = "codigoEditora")
+	private Editora editora;
+
+	@OneToOne(mappedBy = "livro")
+	private Empréstimo emprestimo;
 
 	public Integer getCodigolivro() {
 		return codigolivro;
@@ -76,19 +79,6 @@ public class Livro {
 		this.codigoIsbn = codigoIsbn;
 	}
 
-	public Integer getCodigoEditora() {
-		return codigoEditora;
-	}
-
-	public void setCodigoEditora(Integer codigoEditora) {
-		this.codigoEditora = codigoEditora;
-	
-	}
-	
-	@ManyToOne
-	@JoinColumn (name = "codigoeditora", referencedColumnName = "codigoeditora")
-	private Editora editora;
-
 	public Editora getEditora() {
 		return editora;
 	}
@@ -97,9 +87,6 @@ public class Livro {
 		this.editora = editora;
 	}
 
-	@OneToOne (mappedBy = "livro" )
-	private Empréstimo emprestimo;
-
 	public Empréstimo getEmprestimo() {
 		return emprestimo;
 	}
@@ -107,7 +94,5 @@ public class Livro {
 	public void setEmprestimo(Empréstimo emprestimo) {
 		this.emprestimo = emprestimo;
 	}
-	
-	
-	
+
 }

@@ -23,15 +23,28 @@ public class AlunoService {
 	}
 	
 	public Alunos saveAluno(Alunos aluno) {
+		
 		return AlunoRepository.save(aluno);
 	}
 	
 	public Alunos updateAluno (Alunos aluno, Integer id) {
-		//Aluno alunoExistenteNoBanco - alunoRepository.findById(id).get();
+		//Alunos alunoExistenteNoBanco = AlunoRepository.findById(id).get();
 		
-		//Alunos alunoExistenteNoBanco = getAlunoById(id);
-		//alunoExistenteNoBanco.setBairro());
-		return AlunoRepository.save(aluno);
+		Alunos alunoExistenteNoBanco = getAlunoById(id);
+		alunoExistenteNoBanco.setBairro(aluno.getBairro());
+		alunoExistenteNoBanco.setCidade(aluno.getCidade());
+		alunoExistenteNoBanco.setComplemento(aluno.getComplemento());
+		alunoExistenteNoBanco.setCpf(aluno.getCpf());
+		alunoExistenteNoBanco.setDataNascimento(aluno.getDataNascimento());
+		alunoExistenteNoBanco.setEmprestimos(aluno.getEmprestimos());
+		alunoExistenteNoBanco.setLougradouro(aluno.getLougradouro());
+		alunoExistenteNoBanco.setNome(aluno.getNome());
+		alunoExistenteNoBanco.setNumeroLougradouro(aluno.getNumeroLougradouro());
+		alunoExistenteNoBanco.setNumeroMatriculaeAluno(aluno.getNumeroMatriculaeAluno());
+		
+		return AlunoRepository.save(alunoExistenteNoBanco);
+		
+		//return AlunoRepository.save(aluno);
 	
 	}
 	

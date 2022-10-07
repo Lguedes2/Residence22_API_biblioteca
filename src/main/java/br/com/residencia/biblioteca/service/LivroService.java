@@ -21,7 +21,7 @@ import br.com.residencia.biblioteca.repository.LivroRepository;
 	
 	public Livro getLivroById(Integer id)  {
 		return LivroRepository.findById(id).get();
-	//return alunoRepository.findById(id).orElse (null);
+	//return livroRepository.findById(id).orElse (null);
 	}
 	
 	public Livro saveLivro(Livro livro) {
@@ -29,11 +29,25 @@ import br.com.residencia.biblioteca.repository.LivroRepository;
 	}
 	
 	public  Livro updateAluno ( Livro livro, Integer id) {
-		//Aluno alunoExistenteNoBanco - alunoRepository.findById(id).get();
+		//Livro livroExistenteNoBanco = livroRepository.findById(id).get();
 		
-		//Alunos alunoExistenteNoBanco = getAlunoById(id);
-		//alunoExistenteNoBanco.setBairro());
-		return LivroRepository.save(livro);
+		 Livro livroExistenteNoBanco = getLivroById(id);
+		
+		 livroExistenteNoBanco.setCodigoIsbn(livro.getCodigoIsbn());
+		
+		 livroExistenteNoBanco.setDataLancamento(livro.getDataLancamento());
+		 
+		 //livroExistenteNoBanco.setEditora(Editora);
+		 
+		 //livroExistenteNoBanco.setEmprestimo(Empréstimo);
+		 
+		 livroExistenteNoBanco.setNomeAutor(livro.getNomeAutor());
+		 
+		 livroExistenteNoBanco.setNomeLivro(livro.getNomeAutor());
+		 
+		 return LivroRepository.save(livroExistenteNoBanco);
+		 
+		 //return LivroRepository.save(livro);
 	
 	}
 	

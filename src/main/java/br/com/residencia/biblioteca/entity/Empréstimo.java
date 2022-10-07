@@ -30,6 +30,9 @@ public class Empréstimo {
 	  @Column (name = "dataemprestimo")
 	  private Instant dataEmprestimo;
 	  
+	  @Column (name = "dataentrega")
+	  private Instant dataEntrega;
+	  
 	  @Column (name = "valoremprestimo")
 	  private BigDecimal valoremprestimo;
 	  
@@ -75,6 +78,14 @@ public class Empréstimo {
 
 	public void setAlunos(Alunos alunos) {
 		this.alunos = alunos;
+	}
+
+	public Instant getDataEntrega() {
+		return dataEntrega;
+	}
+
+	public void setDataEntrega(Instant dataEntrega) {
+		this.dataEntrega = dataEntrega;
 	}
 
 	

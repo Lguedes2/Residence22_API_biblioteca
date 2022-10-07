@@ -19,7 +19,7 @@ import br.com.residencia.biblioteca.repository.EditoraRepository;
 	
 	public Editora getEditoraById(Integer id)  {
 		return EditoraRepository.findById(id).get();
-	//return alunoRepository.findById(id).orElse (null);
+	//return editoraRepository.findById(id).orElse (null);
 	}
 	
 	public Editora saveEditora(Editora editora) {
@@ -27,11 +27,14 @@ import br.com.residencia.biblioteca.repository.EditoraRepository;
 	}
 	
 	public  Editora updateAluno ( Editora editora, Integer id) {
-		//Aluno alunoExistenteNoBanco - alunoRepository.findById(id).get();
+		//Editora editoraExistenteNoBanco - editoraRepository.findById(id).get();
 		
-		//Alunos alunoExistenteNoBanco = getAlunoById(id);
-		//alunoExistenteNoBanco.setBairro());
+		Editora editoraExistenteNoBanco = getEditoraById(id);
+	
+		editoraExistenteNoBanco.setNome(editora.getNome());
+		
 		return EditoraRepository.save(editora);
+		//return EditoraRepository.save(editoraExistenteNoBanco);
 	
 	}
 	

@@ -17,7 +17,7 @@ public class Alunos {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "numeromatriculaaluno")
-	private Integer nomeMatriculaeAluno;
+	private Integer  numeroMatriculaeAluno;
 
 	@Column(name = "nome")
 	private String nome;
@@ -28,11 +28,11 @@ public class Alunos {
 	@Column(name = "cpf")
 	private String cpf;
 
-	@Column(name = "lougradouro")
-	private String lougradouro;
+	@Column(name = "logradouro")
+	private String logradouro;
 
-	@Column(name = "numerolougradouro")
-	private String numeroLougradouro;
+	@Column(name = "numerologradouro")
+	private String numeroLogradouro;
 
 	@Column(name = "complemento")
 	private String complemento;
@@ -43,16 +43,17 @@ public class Alunos {
 	@Column(name = "cidade")
 	private String Cidade;
 	
-	@OneToMany (mappedBy = "emprestimo")
+	@OneToMany (mappedBy = "alunos")
 	private Set<Empréstimo> emprestimos;
 
+	
 
-	public Integer getNomeMatriculaeAluno() {
-		return nomeMatriculaeAluno;
+	public Integer getNumeroMatriculaeAluno() {
+		return numeroMatriculaeAluno;
 	}
 
-	public void setNomeMatriculaeAluno(Integer nomeMatriculaeAluno) {
-		this.nomeMatriculaeAluno = nomeMatriculaeAluno;
+	public void setNumeroMatriculaeAluno(Integer numeroMatriculaeAluno) {
+		this.numeroMatriculaeAluno = numeroMatriculaeAluno;
 	}
 
 	public String getNome() {
@@ -80,19 +81,19 @@ public class Alunos {
 	}
 
 	public String getLougradouro() {
-		return lougradouro;
+		return logradouro;
 	}
 
-	public void setLougradouro(String lougradouro) {
-		this.lougradouro = lougradouro;
+	public void setLougradouro(String logradouro) {
+		this.logradouro = logradouro;
 	}
 
 	public String getNumeroLougradouro() {
-		return numeroLougradouro;
+		return numeroLogradouro;
 	}
 
-	public void setNumeroLougradouro(String numeroLougradouro) {
-		this.numeroLougradouro = numeroLougradouro;
+	public void setNumeroLougradouro(String numeroLogradouro) {
+		this.numeroLogradouro = numeroLogradouro;
 	}
 
 	public String getComplemento() {

@@ -31,11 +31,15 @@ import br.com.residencia.biblioteca.repository.EmprestimoRepository;
 		public  Empréstimo updateEmprestimo ( Empréstimo emprestimo, Integer id) {
 			//Empréstimo EmprestimoExistenteNoBanco - EmprestimoRepository.findById(id).get();
 			
-			//Empréstimo EmprestimoExistenteNoBanco = getEmprestimoById(id);
-			//EmprestimoExistenteNoBanco.setBairro());
+			Empréstimo emprestimoExistenteNoBanco = getEmprestimoById(id);
+			//emprestimoExistenteNoBanco.setAluno(Alunos));
+			emprestimoExistenteNoBanco.setDataEmprestimo(emprestimo.getDataEmprestimo());
+			emprestimoExistenteNoBanco.setDataEntrega(emprestimo.getDataEntrega());
+			//emprestimoExistenteNoBanco.setLivro(Livros);
 			
-			return EmprestimoRepository.save(emprestimo);
-		
+			return EmprestimoRepository.save(emprestimoExistenteNoBanco);
+			//return EmprestimoRepository.save(emprestimo);
+			
 		}
 		
 		public Empréstimo deleteEmprestimo(Integer id) {

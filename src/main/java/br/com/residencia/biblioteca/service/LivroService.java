@@ -28,7 +28,7 @@ import br.com.residencia.biblioteca.repository.LivroRepository;
 		return LivroRepository.save(livro);
 	}
 	
-	public  Livro updateAluno ( Livro livro, Integer id) {
+	public  Livro updateLivro ( Livro livro, Integer id) {
 		//Livro livroExistenteNoBanco = livroRepository.findById(id).get();
 		
 		 Livro livroExistenteNoBanco = getLivroById(id);

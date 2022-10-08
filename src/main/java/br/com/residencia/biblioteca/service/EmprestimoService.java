@@ -20,8 +20,8 @@ import br.com.residencia.biblioteca.repository.EmprestimoRepository;
 		}
 		
 		public Empréstimo getEmprestimoById(Integer id)  {
-			return EmprestimoRepository.findById(id).get();
-		//return EmprestimoRepository.findById(id).orElse (null);
+			//return EmprestimoRepository.findById(id).get();
+		return EmprestimoRepository.findById(id).orElse (null);
 		}
 		
 		public Empréstimo saveEmprestimo(Empréstimo emprestimo) {

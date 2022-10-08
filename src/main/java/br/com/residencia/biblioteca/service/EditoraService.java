@@ -18,30 +18,32 @@ import br.com.residencia.biblioteca.repository.EditoraRepository;
 	}
 	
 	public Editora getEditoraById(Integer id)  {
-		return EditoraRepository.findById(id).get();
-	//return editoraRepository.findById(id).orElse (null);
+		//return EditoraRepository.findById(id).get();
+	return EditoraRepository.findById(id).orElse (null);
 	}
 	
 	public Editora saveEditora(Editora editora) {
 		return EditoraRepository.save(editora);
 	}
 	
-	public  Editora updateAluno ( Editora editora, Integer id) {
+	public  Editora updateEditora ( Editora editora, Integer id) {
 		//Editora editoraExistenteNoBanco - editoraRepository.findById(id).get();
 		
 		Editora editoraExistenteNoBanco = getEditoraById(id);
 	
 		editoraExistenteNoBanco.setNome(editora.getNome());
 		
-		return EditoraRepository.save(editora);
-		//return EditoraRepository.save(editoraExistenteNoBanco);
+		//return EditoraRepository.save(editora);
+		return EditoraRepository.save(editoraExistenteNoBanco);
 	
 	}
 	
 	public Editora deleteEditora(Integer id) {
-		EditoraRepository.deleteById(id);
-		return getEditoraById(id);
+		if(null != getEditoraById(id))
+			EditoraRepository.deleteById(id);
 		
-	}
+		return getEditoraById(id);
+		}
+	
 	
 	}

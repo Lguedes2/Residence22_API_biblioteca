@@ -12,7 +12,7 @@
 	<artifactId>biblioteca</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>biblioteca</name>
-	<description>Restful - Gerenciamento de Biblioteca</description>
+	<description>API Restful - Gerenciamento de Biblioteca</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
@@ -45,6 +45,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-ui</artifactId>
+			<version>1.6.11</version>
 		</dependency>
 	</dependencies>
 

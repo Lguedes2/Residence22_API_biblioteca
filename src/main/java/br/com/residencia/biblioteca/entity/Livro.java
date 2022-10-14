@@ -1,7 +1,7 @@
 package br.com.residencia.biblioteca.entity;
 
 import java.time.Instant;
-
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,16 +10,24 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-@Table(name = "livros")
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
+@JsonIdentityInfo(
+		generator = ObjectIdGenerators.PropertyGenerator.class,
+		property = "codigoLivro")
 @Entity
+@Table(name = "livros")
 public class Livro {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "codigolivro")
-	private Integer codigolivro;
+	private Integer codigoLivro;
 
 	@Column(name = "nomelivro")
 	private String nomeLivro;
@@ -33,15 +41,19 @@ public class Livro {
 	@Column(name = "codigoisbn")
 	private Integer codigoIsbn;
 
-	@Column(name = "codigoeditora")
-	private Integer codigoEditora;
+	@ManyToOne
+	@JoinColumn(name = "codigoeditora", referencedColumnName = "codigoeditora")
+	private Editora editora;
 
-	public Integer getCodigolivro() {
-		return codigolivro;
+	@OneToMany(mappedBy = "livro")
+	private Set<Emprestimo> emprestimos;
+
+	public Integer getCodigoLivro() {
+		return codigoLivro;
 	}
 
-	public void setCodigolivro(Integer codigolivro) {
-		this.codigolivro = codigolivro;
+	public void setCodigoLivro(Integer codigoLivro) {
+		this.codigoLivro = codigoLivro;
 	}
 
 	public String getNomeLivro() {
@@ -76,19 +88,6 @@ public class Livro {
 		this.codigoIsbn = codigoIsbn;
 	}
 
-	public Integer getCodigoEditora() {
-		return codigoEditora;
-	}
-
-	public void setCodigoEditora(Integer codigoEditora) {
-		this.codigoEditora = codigoEditora;
-	
-	}
-	
-	@ManyToOne
-	@JoinColumn (name = "codigoeditora", referencedColumnName = "codigoeditora")
-	private Editora editora;
-
 	public Editora getEditora() {
 		return editora;
 	}
@@ -97,17 +96,11 @@ public class Livro {
 		this.editora = editora;
 	}
 
-	@OneToOne (mappedBy = "livro" )
-	private Empréstimo emprestimo;
-
-	public Empréstimo getEmprestimo() {
-		return emprestimo;
+	public Set<Emprestimo> getEmprestimos() {
+		return emprestimos;
 	}
 
-	public void setEmprestimo(Empréstimo emprestimo) {
-		this.emprestimo = emprestimo;
+	public void setEmprestimos(Set<Emprestimo> emprestimos) {
+		this.emprestimos = emprestimos;
 	}
-	
-	
-	
 }

@@ -21,7 +21,7 @@ public class Editora {
 	@Column(name = "nome")
 	private String nome;
 	
-	@OneToMany (mappedBy = "editora")
+	@OneToMany(mappedBy = "editora")
 	private Set<Livro> livros;
 
 	public Integer getCodigoEditora() {
@@ -47,5 +47,5 @@ public class Editora {
 	public void setLivros(Set<Livro> livros) {
 		this.livros = livros;
 	}
-	
+
 }

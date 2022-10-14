@@ -14,51 +14,49 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.residencia.biblioteca.entity.Alunos;
-import 	br.com.residencia.biblioteca.service.AlunoService;
+import br.com.residencia.biblioteca.entity.Aluno;
+import br.com.residencia.biblioteca.service.AlunoService;
 
 @RestController
 @RequestMapping("/alunos")
 public class AlunoController {
 	@Autowired
-	AlunoService AlunoService;
+	AlunoService alunoService;
 	
 	@GetMapping
-	public ResponseEntity<List<Alunos>> getAllAlunos (){
-		return new ResponseEntity<>(AlunoService.getAllAlunos(),HttpStatus.OK);
-	}
-	
-	@GetMapping("/{id}")
-	public ResponseEntity<Alunos> getAlunoById(@PathVariable Integer id) {
-		Alunos aluno = AlunoService.getAlunoById(id);
-		if (null != aluno)
-		return new ResponseEntity<>(aluno, 
+	public ResponseEntity<List<Aluno>> getAllAlunos(){
+		return new ResponseEntity<>(alunoService.getAllAlunos(),
 				HttpStatus.OK);
-		else 
-			
-			return new ResponseEntity<>(aluno, 
+	}
+
+	@GetMapping("/{id}")
+	public ResponseEntity<Aluno> getAlunoById(@PathVariable Integer id) {
+		Aluno aluno = alunoService.getAlunoById(id);
+		if(null != aluno)
+			return new ResponseEntity<>(aluno,
+					HttpStatus.OK);
+		else
+			return new ResponseEntity<>(aluno,
 					HttpStatus.NOT_FOUND);
-			
 	}
 	
-	@PostMapping 
-	public  ResponseEntity<Alunos>saveAluno(@RequestBody Alunos aluno){
-		return new ResponseEntity<>(AlunoService.saveAluno(aluno) , 
+	@PostMapping
+	public ResponseEntity<Aluno> saveAluno(@RequestBody Aluno aluno) {
+		return new ResponseEntity<>(alunoService.saveAluno(aluno),
 				HttpStatus.CREATED);
 	}
-	@PutMapping
-	public  ResponseEntity<Alunos>updateAluno(@RequestBody Alunos aluno,
-			@PathVariable Integer id) {
-		return new  ResponseEntity<>(AlunoService.updateAluno(aluno, id),
-						HttpStatus.OK);
-	}
-	@DeleteMapping
-	public  ResponseEntity<Alunos>deleteAluno(@RequestBody Alunos aluno,
-			@PathVariable Integer id) {
-		return new  ResponseEntity<>(AlunoService.deleteAluno(id),
-						HttpStatus.OK);
+	
+	@PutMapping("/{id}")
+	public ResponseEntity<Aluno> updateAluno(@RequestBody Aluno aluno, 
+			@PathVariable Integer id){
+		return new ResponseEntity<>(alunoService.updateAluno(aluno, id),
+				HttpStatus.OK);
 	}
 	
-} 	
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Aluno> deleteAluno(@PathVariable Integer id) {
+		return new ResponseEntity<>(alunoService.deleteAluno(id),
+				HttpStatus.OK);
+	}
 
-
+}

@@ -5,57 +5,47 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 import br.com.residencia.biblioteca.entity.Livro;
 import br.com.residencia.biblioteca.repository.LivroRepository;
+
 @Service
-	public class LivroService {
+public class LivroService {
+	@Autowired
+	LivroRepository livroRepository;
 	
-		@Autowired
-		LivroRepository LivroRepository;
-	
-	
-	public  List<Livro> getAllLivro () {
-		return LivroRepository.findAll();
+	public List<Livro> getAllLivros(){
+		return livroRepository.findAll();
 	}
 	
-	public Livro getLivroById(Integer id)  {
-		return LivroRepository.findById(id).get();
-	//return livroRepository.findById(id).orElse (null);
+	public Livro getLivroById(Integer id) {
+		return livroRepository.findById(id).get();
+		//return livroRepository.findById(id).orElse(null);
 	}
 	
 	public Livro saveLivro(Livro livro) {
-		return LivroRepository.save(livro);
+		return livroRepository.save(livro);
 	}
 	
-	public  Livro updateLivro ( Livro livro, Integer id) {
+	public Livro updateLivro(Livro livro, Integer id) {
 		//Livro livroExistenteNoBanco = livroRepository.findById(id).get();
 		
-		 Livro livroExistenteNoBanco = getLivroById(id);
+		Livro livroExistenteNoBanco = getLivroById(id);
+
+		livroExistenteNoBanco.setCodigoIsbn(livro.getCodigoIsbn());
+		livroExistenteNoBanco.setDataLancamento(livro.getDataLancamento());
+		//livroExistenteNoBanco.setEditora(Editora);
+		//livroExistenteNoBanco.setEmprestimo(Emprestimo);
+		livroExistenteNoBanco.setNomeAutor(livro.getNomeAutor());
+		livroExistenteNoBanco.setNomeLivro(livro.getNomeLivro());
 		
-		 livroExistenteNoBanco.setCodigoIsbn(livro.getCodigoIsbn());
+		return livroRepository.save(livroExistenteNoBanco);
 		
-		 livroExistenteNoBanco.setDataLancamento(livro.getDataLancamento());
-		 
-		 //livroExistenteNoBanco.setEditora(Editora);
-		 
-		 //livroExistenteNoBanco.setEmprestimo(Empréstimo);
-		 
-		 livroExistenteNoBanco.setNomeAutor(livro.getNomeAutor());
-		 
-		 livroExistenteNoBanco.setNomeLivro(livro.getNomeAutor());
-		 
-		 return LivroRepository.save(livroExistenteNoBanco);
-		 
-		 //return LivroRepository.save(livro);
-	
-	}
-	
-	public Livro deleteLivro(Integer id) {
-		LivroRepository.deleteById(id);
-		return getLivroById(id);
-		
-	}
-	
+		//return livroRepository.save(livro);
 	}
 
+	public Livro deleteLivro(Integer id) {
+		livroRepository.deleteById(id);
+		return getLivroById(id);
+	}
+	
+}

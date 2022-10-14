@@ -7,43 +7,39 @@ import org.springframework.stereotype.Service;
 
 import br.com.residencia.biblioteca.entity.Editora;
 import br.com.residencia.biblioteca.repository.EditoraRepository;
+
 @Service
-	public class EditoraService {
-		@Autowired
-		EditoraRepository EditoraRepository;
+public class EditoraService {
+	@Autowired
+	EditoraRepository editoraRepository;
 	
-	
-	public  List<Editora> getAllEditora () {
-		return EditoraRepository.findAll();
+	public List<Editora> getAllEditoras(){
+		return editoraRepository.findAll();
 	}
 	
-	public Editora getEditoraById(Integer id)  {
-		//return EditoraRepository.findById(id).get();
-	return EditoraRepository.findById(id).orElse (null);
+	public Editora getEditoraById(Integer id) {
+		return editoraRepository.findById(id).orElse(null);
 	}
 	
 	public Editora saveEditora(Editora editora) {
-		return EditoraRepository.save(editora);
+		return editoraRepository.save(editora);
 	}
 	
-	public  Editora updateEditora ( Editora editora, Integer id) {
-		//Editora editoraExistenteNoBanco - editoraRepository.findById(id).get();
+	public Editora updateEditora(Editora editora, Integer id) {
+		//Editora editoraExistenteNoBanco = editoraRepository.findById(id).get();
 		
 		Editora editoraExistenteNoBanco = getEditoraById(id);
-	
+
 		editoraExistenteNoBanco.setNome(editora.getNome());
 		
-		//return EditoraRepository.save(editora);
-		return EditoraRepository.save(editoraExistenteNoBanco);
-	
-	}
-	
-	public Editora deleteEditora(Integer id) {
-		if(null != getEditoraById(id))
-			EditoraRepository.deleteById(id);
+		return editoraRepository.save(editoraExistenteNoBanco);
 		
-		return getEditoraById(id);
-		}
-	
-	
+		//return editoraRepository.save(editora);
 	}
+
+	public Editora deleteEditora(Integer id) {
+		editoraRepository.deleteById(id);
+		return getEditoraById(id);
+	}
+
+}

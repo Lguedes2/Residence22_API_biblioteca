@@ -7,5 +7,5 @@ import br.com.residencia.biblioteca.entity.Editora;
 public interface EditoraRepository extends
 	JpaRepository<Editora, Integer>
 {
- 
+
 }

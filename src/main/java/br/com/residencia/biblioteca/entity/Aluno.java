@@ -11,13 +11,19 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
+@JsonIdentityInfo(
+		generator = ObjectIdGenerators.PropertyGenerator.class,
+		property = "numeroMatriculaAluno")
 @Entity
 @Table(name = "alunos")
-public class Alunos {
+public class Aluno {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "numeromatriculaaluno")
-	private Integer  numeroMatriculaeAluno;
+	private Integer numeroMatriculaAluno;
 
 	@Column(name = "nome")
 	private String nome;
@@ -38,22 +44,28 @@ public class Alunos {
 	private String complemento;
 
 	@Column(name = "bairro")
-	private String Bairro;
+	private String bairro;
 
 	@Column(name = "cidade")
-	private String Cidade;
-	
-	@OneToMany (mappedBy = "alunos")
-	private Set<Empréstimo> emprestimos;
+	private String cidade;
 
-	
+	@OneToMany(mappedBy="aluno")
+	private Set<Emprestimo> emprestimos;
 
-	public Integer getNumeroMatriculaeAluno() {
-		return numeroMatriculaeAluno;
+	public Set<Emprestimo> getEmprestimos() {
+		return emprestimos;
 	}
 
-	public void setNumeroMatriculaeAluno(Integer numeroMatriculaeAluno) {
-		this.numeroMatriculaeAluno = numeroMatriculaeAluno;
+	public void setEmprestimos(Set<Emprestimo> emprestimos) {
+		this.emprestimos = emprestimos;
+	}
+
+	public Integer getNumeroMatriculaAluno() {
+		return numeroMatriculaAluno;
+	}
+
+	public void setNumeroMatriculaAluno(Integer numeroMatriculaAluno) {
+		this.numeroMatriculaAluno = numeroMatriculaAluno;
 	}
 
 	public String getNome() {
@@ -80,19 +92,19 @@ public class Alunos {
 		this.cpf = cpf;
 	}
 
-	public String getLougradouro() {
+	public String getLogradouro() {
 		return logradouro;
 	}
 
-	public void setLougradouro(String logradouro) {
+	public void setLogradouro(String logradouro) {
 		this.logradouro = logradouro;
 	}
 
-	public String getNumeroLougradouro() {
+	public String getNumeroLogradouro() {
 		return numeroLogradouro;
 	}
 
-	public void setNumeroLougradouro(String numeroLogradouro) {
+	public void setNumeroLogradouro(String numeroLogradouro) {
 		this.numeroLogradouro = numeroLogradouro;
 	}
 
@@ -105,28 +117,18 @@ public class Alunos {
 	}
 
 	public String getBairro() {
-		return Bairro;
+		return bairro;
 	}
 
 	public void setBairro(String bairro) {
-		Bairro = bairro;
+		this.bairro = bairro;
 	}
 
 	public String getCidade() {
-		return Cidade;
+		return cidade;
 	}
 
 	public void setCidade(String cidade) {
-		Cidade = cidade;
+		this.cidade = cidade;
 	}
-
-	public Set<Empréstimo> getEmprestimos() {
-		return emprestimos;
-	}
-
-	public void setEmprestimos(Set<Empréstimo> emprestimos) {
-		this.emprestimos = emprestimos;
-	}
-
-	
 }

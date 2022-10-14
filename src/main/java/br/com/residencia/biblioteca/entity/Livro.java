@@ -13,13 +13,21 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-@Table(name = "livros")
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
+@JsonIdentityInfo(
+		generator = ObjectIdGenerators.PropertyGenerator.class,
+		property = "codigoLivro")
 @Entity
+@Table(name = "livros")
 public class Livro {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "codigolivro")
-	private Integer codigolivro;
+	private Integer codigoLivro;
 
 	@Column(name = "nomelivro")
 	private String nomeLivro;
@@ -34,18 +42,18 @@ public class Livro {
 	private Integer codigoIsbn;
 
 	@ManyToOne
-	@JoinColumn(name = "codigoeditora", referencedColumnName = "codigoEditora")
+	@JoinColumn(name = "codigoeditora", referencedColumnName = "codigoeditora")
 	private Editora editora;
 
 	@OneToMany(mappedBy = "livro")
-	private Set<Empréstimo> emprestimos;
+	private Set<Emprestimo> emprestimos;
 
-	public Integer getCodigolivro() {
-		return codigolivro;
+	public Integer getCodigoLivro() {
+		return codigoLivro;
 	}
 
-	public void setCodigolivro(Integer codigolivro) {
-		this.codigolivro = codigolivro;
+	public void setCodigoLivro(Integer codigoLivro) {
+		this.codigoLivro = codigoLivro;
 	}
 
 	public String getNomeLivro() {
@@ -88,13 +96,11 @@ public class Livro {
 		this.editora = editora;
 	}
 
-	public Set<Empréstimo> getEmprestimos() {
+	public Set<Emprestimo> getEmprestimos() {
 		return emprestimos;
 	}
 
-	public void setEmprestimos(Set<Empréstimo> emprestimos) {
+	public void setEmprestimos(Set<Emprestimo> emprestimos) {
 		this.emprestimos = emprestimos;
 	}
-
-	
 }
